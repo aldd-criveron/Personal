@@ -1,16 +1,39 @@
 ---
+import BaseLayout from '../layout/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import FeaturedTopics from '../components/sections/FeaturedTopics.astro';
+
+const topics = [
+  {
+    title: 'Comparativas de software contable',
+    description: 'Contrasta funciones, precios y soporte entre las plataformas más usadas.',
+    href: '/comparativas',
+  },
+  {
+    title: '¿Qué es un software contable?',
+    description: 'Conceptos base para entender qué resuelve y cuándo lo necesitas.',
+    href: '/blog/que-es-un-software-contable',
+  },
+  {
+    title: 'Guías de implementación',
+    description: 'Cómo migrar y poner en marcha un software contable sin fricción.',
+    href: '/blog',
+  },
+
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Inicio"
+  description="Comparativas y guías sobre software contable."
+>
+  <Hero
+    eyebrow="Blog de software contable"
+    title="Elige el software contable correcto para tu negocio"
+    description="Comparativas, guías y artículos para entender el software contable y tomar una mejor decisión."
+    primaryCta={{ label: 'Ver comparativas', href: '/comparativas' }}
+    secondaryCta={{ label: 'Leer el blog', href: '/blog' }}
+  />
+
+  <FeaturedTopics title="Temas destacados" topics={topics} />
+</BaseLayout>

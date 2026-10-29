@@ -1,0 +1,80 @@
+---
+interface Topic {
+  title: string;
+  description: string;
+  href: string;
+}
+
+interface Props {
+  title?: string;
+  topics: Topic[];
+}
+
+const { title = 'Temas destacados', topics } = Astro.props;
+---
+
+<section class="featured">
+  <div class="container">
+    <h2 class="section-title">{title}</h2>
+
+    <ul class="grid" role="list">
+      {topics.map((topic) => (
+        <li class="card">
+          <a class="card-link" href={topic.href}>
+            <h3 class="card-title">{topic.title}</h3>
+            <p class="card-desc">{topic.description}</p>
+            <span class="card-arrow" aria-hidden="true">Leer más →</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .featured { padding-block: 4rem; }
+  .section-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: 0 0 2rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary);
+  }
+  .card-link {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    height: 100%;
+    color: inherit;
+    gap: 0.75rem;
+  }
+  .card-title { font-size: 1.125rem; margin: 0; }
+  .card-desc {
+    color: var(--color-muted);
+    margin: 0;
+    font-size: 0.95rem;
+    flex-grow: 1;
+  }
+  .card-arrow {
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+</style>
